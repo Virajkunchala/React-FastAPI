@@ -19,27 +19,17 @@ A basic Arithmetic  expression evaluation  application using React(Vite) as Fron
 ```bash
     git clone https://github.com/Virajkunchala/React-FastAPI.git
 ```
+
 2.Install frontend dependencies
  ```bash
     cd Frontend-React
     npm install 
 ```
 
-2.Setup Virtual enviroment
- ```bash
-    python -m venv myenv
-    .\myenv\Scripts\activate
-```
-in Linux or mac
- ```bash
-    python -m venv myenv
-    source .\myenv\Scripts\activate
-```
-
 3.Install backend dependencies
 ```bash
 
-    pip install -r requirements.txt
+    cd Backend-Fastapi
 ```
 Setup Virtual enviroment
 
@@ -51,7 +41,6 @@ in Linux or mac
  ```bash
     python -m venv myenv
     source .\myenv\Scripts\activate
-
 ```
 
 ```bash
@@ -59,11 +48,11 @@ in Linux or mac
 ```
 
 4.Start the fastapi backend server
-
 ```bash
 
     uvicorn app.main:app --reload 
 ```
+
 This application will be accessible at [localhost:8000](http://localhost:8000/)
 Just to check if the server is running fine we will not perform any actions here 
 
