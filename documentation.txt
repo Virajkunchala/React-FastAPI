@@ -1,0 +1,52 @@
+Frontend-React/
+│
+├── src/
+│   ├── App.jsx
+│   ├── App.css
+│   └── index.js
+│
+├── public/
+│   ├── index.html
+│   └── favicon.ico
+│
+├── node_modules/
+├── package.json
+├── package-lock.json
+└── README.md
+
+
+Backend-Fastapi/
+│
+├── app/
+│ ├── init.py
+│ ├── main.py
+|
+── tests/
+│ ├── init.py
+│ ├── test_cases.py
+│
+├
+├── requirements.txt
+└── README.md
+
+
+## Frontend 
+- `/src/app.jsx`: contains js logic with componetns and communicate with Fastapi with using axios.and returns the result
+
+
+
+## API Endpoints
+
+- `/api/calculate`: POST endpoint to calculate mathematical expressions.
+
+
+Send a POST request to `/api/calculate` with the following JSON payload:
+
+```json
+{
+    "expression": "10 + 5"
+}
+
+## Tests
+
+`/tests/test_cases`: for running test cases using pytest 

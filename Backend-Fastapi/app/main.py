@@ -4,7 +4,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import re
 
-
 app = FastAPI()
 
 #CORS middleware for communication
@@ -20,14 +19,19 @@ class Expression(BaseModel):
 #api for calculation 
 @app.post("/api/calculate")
 async def calculate(expression:Expression)->dict:
-    '''
-    calculates the mathamatical expression based on the requested data,
-    supports only additon '+' substraction '-' operators
-    Raise HTTP exceiptions for invalid expressions or unsupported operators
-    ''' 
+    """
+    Calculate the mathematical expression based on the requested data.
+    
+    Supports only addition '+' and subtraction '-' operators.
+    
+    Args:
+        expression (Expression): The expression to be calculated.
+        
+    Returns:
+        dict: A dictionary containing the result of the calculation.
+    """
     try: 
         #used regular expression for matching the criteria + - 
-        # num1, operator, num2=re.split("([+-/*])",expression.expression.replace(" ",""))
         num1,operator,num2=re.split(r"(\+|-|\*|/)",expression.expression.replace(" ",""))
         num1=float(num1)
         num2=float(num2)
@@ -40,11 +44,20 @@ async def calculate(expression:Expression)->dict:
     
     result=num1+num2 if operator =="+" else num1-num2
     
-    return {"result":result,"status_code":200,"messge":"Success"}
+    if result < 0:
+        return {"result": result, "is_negative": True, "message": "The result is negative."}
+    
+    return {"result":result,"is_negative": False,"status_code":200,"message":"Success"}
     
 @app.get("/")
 async def read_root():
-    return {"message": "Welcome to fastapi."}
+    """
+    welcome message for the FastAPI.
+    
+    Returns:
+        dict: A dictionary containing the welcome message for debugging.
+    """
+    return {"message": "Welcome to fastapi"}
 
 
 

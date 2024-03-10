@@ -8,64 +8,67 @@ import Button from 'react-bootstrap/Button';
 function App() {
   //input text fileds,error message varibles intilasition 
   const [textInput,setTextInput]=useState('');
-  const[textInputError,setTextInputError]=useState('');
+  const[status,setStatus]=useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [result,setResult]=useState('');
 
   //handle onchange function of text filed
   const handleChange= (event)=>{
     setTextInput(event.target.value);
-    setTextInputError('');
+    setStatus('');
+    setErrorMessage('');
     setResult('');
   };
   
   //form handling (form validation according to arthamtic expression)
   const handleSubmit = async(event)=>{
     event.preventDefault();
-    setTextInputError('');
-    // console.log('textInput:', textInput);
+    setErrorMessage('');
     const processedtextInput=textInput.trim().split(/\s*(?:(\+|\-))\s*/);
     
-    // console.log('textInput:', processedtextInput);
     if (processedtextInput.length !==3){
-      setTextInputError("Invalid input:Please enter two numbers and one operator like : a+b or a-b")
+      setErrorMessage('Invalid input:Please enter two numbers and one operator like : a+b or a-b')
     }
-    // const [num1,operator,num2]=processedtextInput.trim().split(/\s*(?:(\+|\-))\s*/).map(parseFloat);
+
     const num1=parseFloat(processedtextInput[0]);
     const operator=processedtextInput[1];
     const num2=parseFloat(processedtextInput[2]);
-    // console.log([num1+num2]);
+
     //exceptions related other than  +/- operators
     if(!['+','-'].includes(operator)){
-      setTextInputError("Invalid input : operator must be '+' or '-' (like : a+b, a-b)");
+      setErrorMessage('Invalid input : operator must be "+" or "-" (like : a+b, a-b)');
       return;
     }
-    // console.log(num1, num2, operator);
 
     if(isNaN(num1) || !operator || isNaN(num2)){
-      setTextInputError('Please enter a valid arthimatic expression (like : a+b, a-b)');
+      setErrorMessage('Please enter a valid arthimatic expression (like : a+b, a-b)');
       return;
     }
     
     //connect with API end point FASTAPI module 
     try{
       const response=await axios.post("http://localhost:8000/api/calculate",{expression:textInput});
-      console.log(response.data);
+      console.log(response.status);
       setResult(response.data.result);
-      // setTextInputError('');
-      // setTextInput("");
-    }catch(error){
-      setResult('');
-      console.error('Error while submitting the form',error);
-      // setTextInputError('Error while submitting the form try again',error);
-      if (error.response){
-        setTextInputError('Error while submitting the form',error);
-      }else if(error.request){
-        setTextInputError('There seems to be connection error,please check connection and try again');
-      }else{
-        setTextInputError('An error occured while processing your request');
+      setStatus(response.status);
+      setTextInput("");
+      if (response.data.is_negative) {
+        setErrorMessage('The result is negative.');
       }
-    }finally{
-      setTextInput('');
+    }catch(error){
+      // console.log(error);
+      setResult('');
+      // console.error('Error while submitting the form',error);
+      if (error.response) {
+        setStatus(error.response.status);
+        setErrorMessage('Too many values provided. Please use: operand operator operand.');
+      } else if (error.request) {
+        setErrorMessage('There seems to be a API connection error, please check the connection and try again');
+      } else if (error.message) {
+        setErrorMessage('Error: ${error.message}');
+      }else{
+        setErrorMessage('An error occured while processing your request');
+      }
     }
 
   };
@@ -87,7 +90,9 @@ function App() {
            Submit 
         </Button> 
         {result && <div className='text-success'>Result of the expression:{result}</div>}
-          {textInputError && <div className='text-danger'>{textInputError}</div>}
+        {status && <div>Status code: {status}</div>}
+        {errorMessage && <div className='text-danger'>{errorMessage}</div>}
+
       </Form> 
     </div> 
         
