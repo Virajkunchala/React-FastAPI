@@ -50,3 +50,7 @@ Send a POST request to `/api/calculate` with the following JSON payload:
 ## Tests
 
 `/tests/test_cases`: for running test cases using pytest 
+
+`localhost:8000/docs`: Fastapi SwaggerUI -for more better understanding of the API 
+
+

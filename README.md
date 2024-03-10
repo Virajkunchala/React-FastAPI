@@ -8,7 +8,6 @@ A basic Arithmetic  expression evaluation  application using React(Vite) as Fron
 
 2.Node.js  (Node.js v21.6.1)
 
-3.npm
 
 ###How to run
 
@@ -22,18 +21,45 @@ A basic Arithmetic  expression evaluation  application using React(Vite) as Fron
 ```
 2.Install frontend dependencies
  ```bash
-    cd ReactFastAPI/Frontend-React
+    cd Frontend-React
     npm install 
+```
+
+2.Setup Virtual enviroment
+ ```bash
+    python -m venv myenv
+    .\myenv\Scripts\activate
+```
+in Linux or mac
+ ```bash
+    python -m venv myenv
+    source .\myenv\Scripts\activate
 ```
 
 3.Install backend dependencies
 ```bash
 
-    cd ReactFastAPI/Backend-Fastapi
+    pip install -r requirements.txt
+```
+Setup Virtual enviroment
+
+ ```bash
+    python -m venv myenv
+    .\myenv\Scripts\activate
+```
+in Linux or mac
+ ```bash
+    python -m venv myenv
+    source .\myenv\Scripts\activate
+
+```
+
+```bash
     pip install -r requirements.txt
 ```
 
 4.Start the fastapi backend server
+
 ```bash
 
     uvicorn app.main:app --reload 
