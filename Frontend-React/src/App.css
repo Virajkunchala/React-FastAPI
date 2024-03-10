@@ -1,0 +1,31 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+.container{
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 200px;
+}
+.form-group{
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-control{
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border:1px solid #ccc;
+  border-radius: 4px;
+}
+.error-message{
+  color:red;
+  font-size: 0.8rem;
+  max-width: 200%;
+  overflow-wrap: break-word;
+  margin-top: 5px;
+}
