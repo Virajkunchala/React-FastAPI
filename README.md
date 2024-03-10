@@ -18,7 +18,7 @@ A basic Arithmetic  expression evaluation  application using React(Vite) as Fron
    
 1.clone the repository  
 ```bash
-    git clone https://github.com/Virajkunchala/ReactFastAPI.git
+    git clone https://github.com/Virajkunchala/React-FastAPI.git
 ```
 2.Install frontend dependencies
  ```bash
@@ -58,4 +58,13 @@ This application will be accessible at [localhost:5173](http://localhost:5173/)
 4.Result will be display under the button 
 
 As of now only addition/subtraction arithmetic operations are available 
+
+
+###Testing
+
+This application contains unittets to ensure its functionality and realibity,you can run using below command
+
+```bash
+    pytest
+```
 
